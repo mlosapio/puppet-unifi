@@ -21,11 +21,12 @@ class unifi (
 
   # Systemd file
   file {'/etc/systemd/system/unifi.service':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0744',
-    source => 'puppet:///modules/unifi/unifi.service',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0744',
+    source  => 'puppet:///modules/unifi/unifi.service',
+    require => Exec['install_unifi'],
     notify  => [
         Exec['unifi-systemd-reload'],
         Service['unifi'],
@@ -37,7 +38,8 @@ class unifi (
   }
 
   # Hacky way to download the dashboard
-  exec { "/usr/bin/wget ${download_url} && unzip -q UniFi.unix.zip -d /opt":
+  exec { "install_unifi":
+    command     => "/usr/bin/wget ${download_url} && unzip -q UniFi.unix.zip -d /opt",
     cwd         => $install_path,
     creates     => "${install_path}/UniFi/conf",
     require     => File[$install_path]
