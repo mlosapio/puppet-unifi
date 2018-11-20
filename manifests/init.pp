@@ -25,7 +25,7 @@ class unifi (
     owner  => 'root',
     group  => 'root',
     mode   => '0744',
-    source => 'puppet:///modules/puppet_unifi/unifi.service',
+    source => 'puppet:///modules/unifi/unifi.service',
     notify  => [
         Exec['unifi-systemd-reload'],
         Service['unifi'],
