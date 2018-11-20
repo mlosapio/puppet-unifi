@@ -39,7 +39,7 @@ class unifi (
   # Hacky way to download the dashboard
   exec { "/usr/bin/wget ${download_url} && unzip -q UniFi.unix.zip -d /opt":
     cwd         => $install_path,
-    creates     => "${install_path}/tsdbrelay-linux-amd64",
+    creates     => "${install_path}/UniFi/conf",
     require     => File[$install_path]
   }
 
