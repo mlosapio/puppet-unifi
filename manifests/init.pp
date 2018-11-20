@@ -37,15 +37,9 @@ class unifi (
     ensure => directory,
   }
 
-  file { "${install_path}/UniFi":
-    owner   => 'ubnt',
-    group   => 'ubnt',
-    recurse => true,
-  }
-
   # Hacky way to download the dashboard
   exec { "install_unifi":
-    command     => "/usr/bin/wget ${download_url} && unzip -q UniFi.unix.zip -d /opt",
+    command     => "/usr/bin/wget ${download_url} && unzip -q UniFi.unix.zip -d /opt && chown -R ubnt:ubnt /opt/UniFi",
     cwd         => $install_path,
     creates     => "${install_path}/UniFi/conf",
     require     => File[$install_path]
