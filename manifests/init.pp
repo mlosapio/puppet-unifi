@@ -1,6 +1,6 @@
 # Class: unifi
 class unifi (
-  $download_url = 'http://dl.ubnt.com/unifi/5.13.32/UniFi.unix.zip',
+  $download_url = 'http://dl.ubnt.com/unifi/6.0.36/UniFi.unix.zip',
   $install_path = '/opt',
 ){
 
